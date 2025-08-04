@@ -4,17 +4,329 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Duoward - Login</title>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800;900&display=swap"
-      rel="stylesheet"
-    />
-    <link rel="stylesheet" href="teste.css" />
+    <style>
+      @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800;900&display=swap");
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: "Nunito", system-ui, -apple-system, sans-serif;
+        min-height: 100vh;
+        background: linear-gradient(
+          135deg,
+          #1f2937 0%,
+          #000000 50%,
+          #374151 100%
+        );
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 1rem;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .bg-svg {
+        position: fixed;
+        opacity: 0.15;
+        z-index: 1;
+      }
+
+      .bg-svg-main {
+        width: 600px;
+        height: 600px;
+        top: 50%;
+        left: 50px;
+        transform: translateY(-50%);
+        animation: gentleFloat 15s ease-in-out infinite;
+      }
+
+      @keyframes gentleFloat {
+        0%,
+        100% {
+          transform: translateY(-50%) translateX(0px);
+        }
+        20% {
+          transform: translateY(-52%) translateX(3px);
+        }
+        40% {
+          transform: translateY(-48%) translateX(-2px);
+        }
+        60% {
+          transform: translateY(-51%) translateX(4px);
+        }
+        80% {
+          transform: translateY(-49%) translateX(-1px);
+        }
+      }
+
+      .particle {
+        display: none;
+      }
+
+      @keyframes float {
+        display: none;
+      }
+
+      .container {
+        position: relative;
+        z-index: 10;
+        width: 100%;
+        max-width: 28rem;
+      }
+
+      .title-section {
+        text-align: center;
+        margin-bottom: 2.5rem;
+      }
+
+      .logo-title {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        margin-bottom: 1rem;
+      }
+
+      .main-title {
+        font-size: 2.5rem;
+        font-weight: 700;
+        color: white;
+        letter-spacing: -0.025em;
+        line-height: 1.2;
+      }
+
+      .subtitle {
+        font-size: 1.5rem;
+        font-weight: 400;
+        color: #d1d5db;
+        letter-spacing: 0.025em;
+        text-align: center;
+      }
+
+      .login-form {
+        background: rgba(31, 41, 55, 0.5);
+        backdrop-filter: blur(16px);
+        border: 1px solid rgba(75, 85, 99, 0.5);
+        border-radius: 1rem;
+        padding: 1.5rem;
+        box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+        max-width: 24rem;
+        margin: 0 auto;
+      }
+
+      .form-group {
+        margin-bottom: 1rem;
+      }
+
+      .input-container {
+        position: relative;
+      }
+
+      .input-icon {
+        position: absolute;
+        left: 0.75rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #9ca3af;
+        width: 1rem;
+        height: 1rem;
+      }
+
+      .form-input {
+        width: 100%;
+        padding: 0.75rem 0.75rem 0.75rem 2.5rem;
+        background: rgba(17, 24, 39, 0.7);
+        border: 1px solid rgba(75, 85, 99, 0.5);
+        border-radius: 0.5rem;
+        color: white;
+        font-size: 0.875rem;
+        transition: all 0.3s ease;
+      }
+
+      .form-input::placeholder {
+        color: #9ca3af;
+      }
+
+      .form-input:focus {
+        outline: none;
+        border-color: #10b981;
+        box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.5);
+      }
+
+      .form-input:hover {
+        border-color: rgba(107, 114, 128, 0.7);
+      }
+
+      .password-toggle {
+        position: absolute;
+        right: 0.75rem;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        color: #9ca3af;
+        cursor: pointer;
+        padding: 0;
+        transition: color 0.2s ease;
+      }
+
+      .password-toggle:hover {
+        color: #34d399;
+      }
+
+      .login-button {
+        width: 100%;
+        padding: 0.75rem 1.5rem;
+        background: linear-gradient(90deg, #10b981, #059669);
+        color: white;
+        border: none;
+        border-radius: 0.5rem;
+        font-size: 0.875rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+      }
+
+      .login-button:hover {
+        background: linear-gradient(90deg, #059669, #047857);
+        transform: scale(1.02);
+        box-shadow: 0 10px 25px -5px rgba(16, 185, 129, 0.25);
+      }
+
+      .login-button:focus {
+        outline: none;
+        box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.5);
+      }
+
+      .login-button:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+        transform: none;
+      }
+
+      .loading-spinner {
+        display: inline-block;
+        width: 1rem;
+        height: 1rem;
+        border: 2px solid white;
+        border-top: 2px solid transparent;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin-right: 0.5rem;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      .footer {
+        text-align: center;
+        margin-top: 1.5rem;
+      }
+
+      .footer-text {
+        color: #6b7280;
+        font-size: 0.75rem;
+      }
+
+      @media (max-width: 640px) {
+        .main-title {
+          font-size: 2rem;
+        }
+
+        .subtitle {
+          font-size: 1.25rem;
+        }
+
+        .bg-svg-main {
+          width: 400px;
+          height: 400px;
+          left: 30px;
+        }
+      }
+
+      .monitor-icon {
+        width: 36px;
+        height: 28px;
+        background: linear-gradient(145deg, #1a1a1a, #333);
+        border-radius: 4px;
+        border: 2px solid #34d399;
+        position: relative;
+        overflow: hidden;
+        box-shadow: 0 0 10px rgba(52, 211, 153, 0.3);
+        flex-shrink: 0;
+      }
+
+      .monitor-content {
+        position: absolute;
+        top: 2px;
+        left: 2px;
+        right: 2px;
+        bottom: 2px;
+        background: #000;
+        border-radius: 2px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+      }
+
+      .data-lines {
+        display: flex;
+        flex-direction: column;
+        gap: 2px;
+        align-items: center;
+      }
+
+      .data-line {
+        height: 2px;
+        background: linear-gradient(90deg, #10b981, #34d399);
+        border-radius: 1px;
+        animation: pulse 1.5s infinite;
+      }
+
+      .data-line:nth-child(1) {
+        width: 18px;
+        animation-delay: 0s;
+      }
+
+      .data-line:nth-child(2) {
+        width: 14px;
+        animation-delay: 0.3s;
+      }
+
+      .data-line:nth-child(3) {
+        width: 20px;
+        animation-delay: 0.6s;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 0.4;
+          transform: scaleX(0.8);
+        }
+        50% {
+          opacity: 1;
+          transform: scaleX(1.2);
+        }
+      }
+    </style>
   </head>
   <body>
-    <!-- Background shapes -->
-    <div class="bg-shape bg-shape-1"></div>
-    <div class="bg-shape bg-shape-2"></div>
-    <div class="bg-shape bg-shape-3"></div>
+    <!-- Background SVG -->
+    <img src="frame.svg" alt="" class="bg-svg bg-svg-main" />
 
     <!-- Main container -->
     <div class="container">
@@ -123,6 +435,48 @@
       </div>
     </div>
 
-    <script src="teste.js"></script>
+    <script>
+      // Password toggle functionality
+      document
+        .getElementById("togglePassword")
+        .addEventListener("click", function () {
+          const passwordField = document.getElementById("password");
+          const eyeIcon = document.getElementById("eyeIcon");
+
+          if (passwordField.type === "password") {
+            passwordField.type = "text";
+            eyeIcon.innerHTML = `
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.875 18.825A10.05 10.05 0 0112 19c-4.478 0-8.268-2.943-9.543-7a9.97 9.97 0 011.563-3.029m5.858.908a3 3 0 114.243 4.243M9.878 9.878l4.242 4.242M9.878 9.878L3 3m6.878 6.878L21 21"></path>
+          `;
+          } else {
+            passwordField.type = "password";
+            eyeIcon.innerHTML = `
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"></path>
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z"></path>
+          `;
+          }
+        });
+
+      // Form submission with loading effect
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", function (e) {
+          e.preventDefault();
+
+          const button = document.getElementById("loginButton");
+          const buttonText = document.getElementById("buttonText");
+
+          button.disabled = true;
+          buttonText.innerHTML =
+            '<span class="loading-spinner"></span>Logging in...';
+
+          // Simulate login process
+          setTimeout(() => {
+            button.disabled = false;
+            buttonText.textContent = "Log in";
+            alert("Login realizado com sucesso!");
+          }, 2000);
+        });
+    </script>
   </body>
 </html>
