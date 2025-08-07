@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Duoward - Login</title>
+    <title>Duoward SentinelX - Login</title>
     <style>
       @import url("https://fonts.googleapis.com/css2?family=Nunito:wght@200;300;400;500;600;700;800;900&display=swap");
 
@@ -89,19 +89,29 @@
       }
 
       .main-title {
-        font-size: 2.5rem;
+        font-size: 3.5rem;
         font-weight: 700;
-        color: white;
+        color: #10b981;
         letter-spacing: -0.025em;
         line-height: 1.2;
       }
 
+      .brand-name {
+        font-size: 2.5rem;
+        font-weight: 600;
+        color: white;
+        letter-spacing: -0.025em;
+        line-height: 1.2;
+        margin-top: 0.5rem;
+      }
+
       .subtitle {
-        font-size: 1.5rem;
-        font-weight: 400;
+        font-size: 1rem;
+        font-weight: 300;
         color: #d1d5db;
         letter-spacing: 0.025em;
         text-align: center;
+        margin-top: 0.5rem;
       }
 
       .login-form {
@@ -238,11 +248,15 @@
 
       @media (max-width: 640px) {
         .main-title {
+          font-size: 2.8rem;
+        }
+
+        .brand-name {
           font-size: 2rem;
         }
 
         .subtitle {
-          font-size: 1.25rem;
+          font-size: 0.9rem;
         }
 
         .bg-svg-main {
@@ -252,71 +266,17 @@
         }
       }
 
-      .monitor-icon {
-        width: 36px;
-        height: 28px;
-        background: linear-gradient(145deg, #1a1a1a, #333);
-        border-radius: 4px;
-        border: 2px solid #34d399;
-        position: relative;
-        overflow: hidden;
-        box-shadow: 0 0 10px rgba(52, 211, 153, 0.3);
-        flex-shrink: 0;
-      }
-
-      .monitor-content {
-        position: absolute;
-        top: 2px;
-        left: 2px;
-        right: 2px;
-        bottom: 2px;
-        background: #000;
-        border-radius: 2px;
+      .logo-container {
         display: flex;
-        flex-direction: column;
+        align-items: center;
         justify-content: center;
-        align-items: center;
+        margin-bottom: 1rem;
       }
 
-      .data-lines {
-        display: flex;
-        flex-direction: column;
-        gap: 2px;
-        align-items: center;
-      }
-
-      .data-line {
-        height: 2px;
-        background: linear-gradient(90deg, #10b981, #34d399);
-        border-radius: 1px;
-        animation: pulse 1.5s infinite;
-      }
-
-      .data-line:nth-child(1) {
-        width: 18px;
-        animation-delay: 0s;
-      }
-
-      .data-line:nth-child(2) {
-        width: 14px;
-        animation-delay: 0.3s;
-      }
-
-      .data-line:nth-child(3) {
-        width: 20px;
-        animation-delay: 0.6s;
-      }
-
-      @keyframes pulse {
-        0%,
-        100% {
-          opacity: 0.4;
-          transform: scaleX(0.8);
-        }
-        50% {
-          opacity: 1;
-          transform: scaleX(1.2);
-        }
+      .logo-image {
+        width: 120px;
+        height: 120px;
+        border-radius: 8px;
       }
     </style>
   </head>
@@ -328,19 +288,12 @@
     <div class="container">
       <!-- Title section -->
       <div class="title-section">
-        <div class="logo-title">
-          <div class="monitor-icon">
-            <div class="monitor-content">
-              <div class="data-lines">
-                <div class="data-line"></div>
-                <div class="data-line"></div>
-                <div class="data-line"></div>
-              </div>
-            </div>
-          </div>
-          <h1 class="main-title">Duowatch</h1>
+        <div class="logo-container">
+          <img src="Imagem gerada-Photoroom.png" alt="Duoward SentinelX Logo" class="logo-image" />
         </div>
-        <h4 class="subtitle">Cibersegurança e Monitoramento</h4>
+        <div class="brand-name">DUOWARD</div>
+        <h1 class="main-title">SentinelX</h1>
+        <h4 class="subtitle">Inteligência contínua. Defesa sem falhas.</h4>
       </div>
 
       <!-- Login form -->
